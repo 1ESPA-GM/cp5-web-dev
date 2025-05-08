@@ -1,0 +1,55 @@
+const express= require("express")
+const cors= require("cors")
+const bodyParser=require("body-parser")
+const {v4:uuid}=require("uuid")
+
+const app= express();
+const Port=3000;
+
+app.use= (cors());
+app.use= (bodyParser.json());
+
+let bicicletas=[];
+
+app.listen(
+    Port,
+    ()=> console.log(`Está ligado no http://localhost:3000 ${Port}`)
+)
+
+
+
+
+app.post('/bicicletas', (req,res)=>{
+    const{nome,descricao,preco,modelo,estoque}=req.body;
+    if(!nome || !descricao || !preco || !modelo || !estoque){
+        return res.status(400).json({error: 'Campos obrigatórios'})
+    }
+})
+app.post('/bicicletas', (req,res)=>{
+    const{nome,descricao,preco,modelo,estoque}=req.body;
+    if(!nome || !descricao || !preco || !modelo || !estoque){
+        return res.status(400).json({error: 'Campos obrigatórios'});
+    }
+    const novoItem={id:uuid(), nome, descricao, preco, modelo, estoque}
+    bicicletas.push(novoItem);
+    return res.status(201).json(novoItem)
+})
+app.get('/bicicletas',(req,res)=>{
+    res.json(bicicletas)
+})
+
+app.put('bicicletas', (req,req)=>{
+    const bicicletaId=req.params.id;
+    const{nome,descricao,preco,modelo,estoque}=req.body;
+    if(!nome || !descricao || !preco || !modelo || !estoque){
+        return res.status(400).json({error: 'Campos obrigatórios'})
+    }
+    const bicicletaIndex = bicicletas.findIndex(item=>item.id===bicicletaId);
+    if(bicicletaIndex===-1){
+        return res.status(400).json({error:'Produto não encontrado...'})
+    }
+    bicicletas[bicicletaIndex] = {id:produtoId, nome,descricao,preco,modelo,estoque}
+    res.json(bicicletas[bicicletaIndex])
+})
+
+
