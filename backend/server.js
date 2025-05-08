@@ -25,6 +25,11 @@ app.post('/bicicletas', (req,res)=>{
         return res.status(400).json({error: 'Campos obrigatórios'})
     }
 })
+
+app.get('/bicicletas',(req,res)=>{
+    res.json(bicicletas)
+})
+
 app.post('/bicicletas', (req,res)=>{
     const{nome,descricao,preco,modelo,estoque}=req.body;
     if(!nome || !descricao || !preco || !modelo || !estoque){
@@ -34,11 +39,9 @@ app.post('/bicicletas', (req,res)=>{
     bicicletas.push(novoItem);
     return res.status(201).json(novoItem)
 })
-app.get('/bicicletas',(req,res)=>{
-    res.json(bicicletas)
-})
 
-app.put('bicicletas', (req,req)=>{
+
+app.put('bicicletas', (req,res)=>{
     const bicicletaId=req.params.id;
     const{nome,descricao,preco,modelo,estoque}=req.body;
     if(!nome || !descricao || !preco || !modelo || !estoque){
@@ -46,10 +49,20 @@ app.put('bicicletas', (req,req)=>{
     }
     const bicicletaIndex = bicicletas.findIndex(item=>item.id===bicicletaId);
     if(bicicletaIndex===-1){
-        return res.status(400).json({error:'Produto não encontrado...'})
+        return res.status(404).json({error:'Produto não encontrado...'})
     }
     bicicletas[bicicletaIndex] = {id:produtoId, nome,descricao,preco,modelo,estoque}
     res.json(bicicletas[bicicletaIndex])
+})
+
+app.delete('/bicicletas', (req,res)=>{
+    const bicicletaId=req.params.id;
+    const inicioBicicleta = bicicletas.length;
+    bicicletas= bicicletas.filter(item=>item.id!== bicicletas)
+    if (bicicletaId.length === inicioBicicleta){
+        return res.status(404).json({error: 'Produto não encontrado'})
+    }
+
 })
 
 
