@@ -1,6 +1,6 @@
 import Footer from './components/Footer'
 import Nav from './components/Nav'
-import Bicicletas from '/components/Bicicletas'
+import Bicicletas from './components/Bicicletas'
 
 
 function App() {
@@ -9,7 +9,6 @@ function App() {
     <>
     <Nav/>
     <Bicicletas/>
-    <addBikes.jsx/>
     <Footer/>
     </>
   )

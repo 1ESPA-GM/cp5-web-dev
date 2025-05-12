@@ -8,27 +8,10 @@ const Port=3000;
 
 app.use= (cors());
 app.use= (bodyParser.json());
+app.use(express.static('static'));
 
 let bicicletas=[];
 
-app.listen(
-    Port,
-    ()=> console.log(`Está ligado no http://localhost:3000 ${Port}`)
-)
-
-
-
-
-app.post('/bicicletas', (req,res)=>{
-    const{nome,descricao,preco,modelo,estoque}=req.body;
-    if(!nome || !descricao || !preco || !modelo || !estoque){
-        return res.status(400).json({error: 'Campos obrigatórios'})
-    }
-})
-
-app.get('/bicicletas',(req,res)=>{
-    res.json(bicicletas)
-})
 
 app.post('/bicicletas', (req,res)=>{
     const{nome,descricao,preco,modelo,estoque}=req.body;
@@ -40,6 +23,9 @@ app.post('/bicicletas', (req,res)=>{
     return res.status(201).json(novoItem)
 })
 
+app.get('/bicicletas',(req,res)=>{
+    res.json(bicicletas)
+})
 
 app.put('bicicletas', (req,res)=>{
     const bicicletaId=req.params.id;
@@ -66,3 +52,7 @@ app.delete('/bicicletas', (req,res)=>{
 })
 
 
+app.listen(
+    Port,
+    ()=> console.log(`Está ligado no http://localhost:3000 ${Port}`)
+)

@@ -1,1 +1,35 @@
 @import "tailwindcss";
+
+.bicicletas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));  /* Cria colunas responsivas */
+    gap: 20px;  /* Espaçamento entre os itens */
+    padding: 20px;
+  }
+  
+  .bicicleta-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .bicicleta-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .bicicleta-card h2 {
+    font-size: 1.2rem;
+    margin-top: 12px;
+  }
+  
+  .bicicleta-card p {
+    font-size: 1rem;
+    color: #555;
+  }
